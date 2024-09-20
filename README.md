@@ -49,7 +49,7 @@ PRIVATE_KEY=your_private_key
 ```
 ## 8. Configure Hardhat for the Testnet
 ```Bash
-nano hardhat.config.js
+rm hardhat.config.js && nano hardhat.config.js
 ```
 ```Bash
 /** @type import('hardhat/config').HardhatUserConfig */
