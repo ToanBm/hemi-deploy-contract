@@ -19,7 +19,7 @@ npm init -y
 
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
-echo "4" | npx hardhat init
+echo "1" | npx hardhat init
 
 mkdir contracts && mkdir scripts
 
