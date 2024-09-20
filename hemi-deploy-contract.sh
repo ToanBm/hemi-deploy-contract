@@ -19,9 +19,8 @@ else
     echo "npx is already installed."
 fi
 
-# Step 3: Create a new folder for the project
-mkdir -p hardhat_project
-cd hardhat_project
+# Step 3: Install hardhat
+npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
 # Step 4: Automatically choose "Create an empty hardhat.config.js"
 yes "" | npx hardhat
@@ -55,7 +54,6 @@ npm install dotenv
 # Step 7: Create .env file for storing private key
 read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
 
-print_command "Generating .env file..."
 cat <<EOF > .env
 PRIVATE_KEY=$PRIVATE_KEY
 EOF
