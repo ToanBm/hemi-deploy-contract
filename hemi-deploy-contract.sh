@@ -14,6 +14,37 @@ print_command() {
   echo -e "${BOLD}${YELLOW}$1${RESET}"
 }
 
+sudo apt-get update && sudo apt get upgrade -y
+clear
+
+echo "Installing dependencies..."
+npm install --save-dev hardhat
+npm install dotenv
+npm install @swisstronik/utils
+npm install @openzeppelin/hardhat-upgrades
+npm install @openzeppelin/contracts
+npm install @nomicfoundation/hardhat-toolbox
+echo "Installation completed."
+
+echo "Creating a Hardhat project..."
+npx hardhat
+
+rm -f contracts/Lock.sol
+echo "Lock.sol removed."
+
+echo "Hardhat project created."
+
+echo "Installing Hardhat toolbox..."
+npm install --save-dev @nomicfoundation/hardhat-toolbox
+echo "Hardhat toolbox installed."
+
+echo "Creating .env file..."
+read -p "Enter your private key: " PRIVATE_KEY
+echo "PRIVATE_KEY=$PRIVATE_KEY" > .env
+echo ".env file created."
+
+
+
 print_command "Updating System Packages..."
 npm init -y
 
