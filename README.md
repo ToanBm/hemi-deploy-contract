@@ -1,4 +1,6 @@
 # Deploy an ERC-20 Token
+- Open [Github Codespace](https://github.com/codespaces)
+- Paste the below command to Deploy an ERC-20 Token
 ## 1. Initialize Your NPM Project
 ```Bash
 npm init -y
