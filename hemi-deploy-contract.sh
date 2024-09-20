@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Step 1: Initialize npm and install dependencies
+mkdir my-project && cd my-project
 npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
