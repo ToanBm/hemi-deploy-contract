@@ -32,10 +32,10 @@ npx hardhat compile
 npm install dotenv
 
 # Step 7: Create .env file for storing private key
-cat <<EOL > .env
-PRIVATE_KEY=your_private_key
-EOL
-echo "Please replace 'your_private_key' with your actual private key in the .env file."
+echo "Creating .env file..."
+read -p "Enter your private key: " PRIVATE_KEY
+echo "PRIVATE_KEY=$PRIVATE_KEY" > .env
+echo ".env file created."
 
 # Step 8: Update hardhat.config.js with the proper configuration
 rm hardhat.config.js
