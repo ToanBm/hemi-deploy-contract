@@ -5,11 +5,7 @@ npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
 # Step 2: Create the necessary Hardhat files manually instead of using npx hardhat init
-mkdir contracts scripts
-
-# Step 3: Create an empty hardhat.config.js
-echo '/** @type import("hardhat/config").HardhatUserConfig */
-module.exports = {};' > hardhat.config.js
+mkdir contracts && mkdir scripts
 
 # Step 4: Create MyToken.sol contract
 cat <<EOL > contracts/MyToken.sol
@@ -40,7 +36,6 @@ PRIVATE_KEY=$PRIVATE_KEY
 EOF
 
 # Step 8: Update hardhat.config.js with the proper configuration
-rm hardhat.config.js
 cat <<EOL > hardhat.config.js
 /** @type import('hardhat/config').HardhatUserConfig */
 require('dotenv').config();
