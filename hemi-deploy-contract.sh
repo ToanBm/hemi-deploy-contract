@@ -1,60 +1,21 @@
 #!/bin/bash
 
-BOLD=$(tput bold)
-RESET=$(tput sgr0)
-YELLOW=$(tput setaf 3)
-# Logo
-
-echo     "*********************************************"
-echo     "Githuh: https://github.com/ToanBm"
-echo     "X: https://x.com/buiminhtoan1985"
-echo -e "\e[0m"
-
-print_command() {
-  echo -e "${BOLD}${YELLOW}$1${RESET}"
-}
-
-sudo apt-get update && sudo apt get upgrade -y
-clear
-
-echo "Installing dependencies..."
-npm install --save-dev hardhat
-npm install dotenv
-npm install @swisstronik/utils
-npm install @openzeppelin/hardhat-upgrades
-npm install @openzeppelin/contracts
-npm install @nomicfoundation/hardhat-toolbox
-echo "Installation completed."
-
-echo "Creating a Hardhat project..."
-npx hardhat
-
-rm -f contracts/Lock.sol
-echo "Lock.sol removed."
-
-echo "Hardhat project created."
-
-echo "Installing Hardhat toolbox..."
-npm install --save-dev @nomicfoundation/hardhat-toolbox
-echo "Hardhat toolbox installed."
-
-echo "Creating .env file..."
-read -p "Enter your private key: " PRIVATE_KEY
-echo "PRIVATE_KEY=$PRIVATE_KEY" > .env
-echo ".env file created."
-
-
-
-print_command "Updating System Packages..."
+# Step 1: Initialize npm and install dependencies
 npm init -y
-
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
-echo "1" | npx hardhat init
+# Step 2: Initialize Hardhat
+npx hardhat init
 
-mkdir contracts && mkdir scripts
+# Step 3: Create empty hardhat.config.js
+echo '/** @type import("hardhat/config").HardhatUserConfig */
+module.exports = {};' > hardhat.config.js
 
-cat <<EOF > MyToken.sol
+# Step 4: Create contracts and scripts directories
+mkdir contracts scripts
+
+# Step 5: Create MyToken.sol contract
+cat <<EOL > contracts/MyToken.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -65,24 +26,25 @@ contract MyToken is ERC20 {
         _mint(msg.sender, initialSupply);
     }
 }
-EOF
+EOL
 
+# Step 6: Compile contracts
 npx hardhat compile
 
+# Step 7: Install dotenv package
 npm install dotenv
 
-read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
+# Step 8: Create .env file for storing private key
+cat <<EOL > .env
+PRIVATE_KEY=your_private_key
+EOL
+echo "Please replace 'your_private_key' with your actual private key in the .env file."
 
-print_command "Generating .env file..."
-cat <<EOF > .env
-PRIVATE_KEY=$PRIVATE_KEY
-EOF
-
+# Step 9: Update hardhat.config.js
 rm hardhat.config.js
-
-cat <<EOF > hardhat.config.js
+cat <<EOL > hardhat.config.js
 /** @type import('hardhat/config').HardhatUserConfig */
-require('dotenv').config()
+require('dotenv').config();
 require("@nomiclabs/hardhat-ethers");
 
 module.exports = {
@@ -91,13 +53,14 @@ module.exports = {
     hemi: {
       url: "https://testnet.rpc.hemi.network/rpc",
       chainId: 743111,
-      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      accounts: [\`0x\${process.env.PRIVATE_KEY}\`],
     },
   }
 };
-EOF
+EOL
 
-cat <<EOF > deploy.js
+# Step 10: Create deploy script
+cat <<EOL > scripts/deploy.js
 const { ethers } = require("hardhat");
 
 async function main() {
@@ -114,21 +77,7 @@ main().catch((error) => {
     console.error(error);
     process.exit(1);
 });
-EOF
+EOL
 
+# Step 11: Deploy the contract to the Hemi network
 npx hardhat run scripts/deploy.js --network hemi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
