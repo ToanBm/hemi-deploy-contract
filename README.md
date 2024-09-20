@@ -13,6 +13,7 @@ npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/co
 ```Bash
 npx hardhat init
 ```
+(https://github.com/ToanBm/hemi-deploy-contract/blob/main/hemi.jpg)
 ## 4. Add Folder
 ```Bash
 mkdir contracts && mkdir scripts
