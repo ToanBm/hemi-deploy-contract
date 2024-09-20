@@ -1,15 +1,38 @@
 #!/bin/bash
 
-# Step 1: Initialize npm and install dependencies
-npm init -y
-npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
+# Step 1: Install Node.js (if not installed)
+if ! command -v node &> /dev/null
+then
+    echo "Node.js not found. Installing Node.js..."
+    curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    sudo apt-get install -y nodejs
+else
+    echo "Node.js is already installed."
+fi
 
-npx hardhat init --force --skip-install
+# Step 2: Install npx if not installed
+if ! command -v npx &> /dev/null
+then
+    echo "npx not found. Installing npx..."
+    npm install -g npx
+else
+    echo "npx is already installed."
+fi
+
+# Step 3: Create a new folder for the project
+mkdir -p hardhat_project
+cd hardhat_project
+
+# Step 4: Automatically choose "Create an empty hardhat.config.js"
+yes "" | npx hardhat
+
+echo "Hardhat project initialized with an empty hardhat.config.js."
+
 
 # Step 2: Create the necessary Hardhat files manually instead of using npx hardhat init
-mkdir contracts scripts
 
 # Step 4: Create MyToken.sol contract
+rm  contracts/Lock.sol
 cat <<EOL > contracts/MyToken.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -38,6 +61,8 @@ PRIVATE_KEY=$PRIVATE_KEY
 EOF
 
 # Step 8: Update hardhat.config.js with the proper configuration
+rm hardhat.config.js
+
 cat <<EOL > hardhat.config.js
 /** @type import('hardhat/config').HardhatUserConfig */
 require('dotenv').config();
