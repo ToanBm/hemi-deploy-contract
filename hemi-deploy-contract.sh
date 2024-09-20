@@ -4,17 +4,14 @@
 npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
-# Step 2: Initialize Hardhat
-npx hardhat init
+# Step 2: Create the necessary Hardhat files manually instead of using npx hardhat init
+mkdir contracts scripts
 
-# Step 3: Create empty hardhat.config.js
+# Step 3: Create an empty hardhat.config.js
 echo '/** @type import("hardhat/config").HardhatUserConfig */
 module.exports = {};' > hardhat.config.js
 
-# Step 4: Create contracts and scripts directories
-mkdir contracts scripts
-
-# Step 5: Create MyToken.sol contract
+# Step 4: Create MyToken.sol contract
 cat <<EOL > contracts/MyToken.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -28,19 +25,19 @@ contract MyToken is ERC20 {
 }
 EOL
 
-# Step 6: Compile contracts
+# Step 5: Compile contracts
 npx hardhat compile
 
-# Step 7: Install dotenv package
+# Step 6: Install dotenv package
 npm install dotenv
 
-# Step 8: Create .env file for storing private key
+# Step 7: Create .env file for storing private key
 cat <<EOL > .env
 PRIVATE_KEY=your_private_key
 EOL
 echo "Please replace 'your_private_key' with your actual private key in the .env file."
 
-# Step 9: Update hardhat.config.js
+# Step 8: Update hardhat.config.js with the proper configuration
 rm hardhat.config.js
 cat <<EOL > hardhat.config.js
 /** @type import('hardhat/config').HardhatUserConfig */
@@ -59,7 +56,7 @@ module.exports = {
 };
 EOL
 
-# Step 10: Create deploy script
+# Step 9: Create deploy script
 cat <<EOL > scripts/deploy.js
 const { ethers } = require("hardhat");
 
@@ -79,5 +76,5 @@ main().catch((error) => {
 });
 EOL
 
-# Step 11: Deploy the contract to the Hemi network
+# Step 10: Deploy the contract to the Hemi network
 npx hardhat run scripts/deploy.js --network hemi
