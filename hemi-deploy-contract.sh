@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Step 1: Initialize npm and install dependencies
-mkdir my-project && cd my-project
 npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
+npx hardhat init --force --skip-install
+
 # Step 2: Create the necessary Hardhat files manually instead of using npx hardhat init
-mkdir contracts && mkdir scripts
+mkdir contracts scripts
 
 # Step 4: Create MyToken.sol contract
 cat <<EOL > contracts/MyToken.sol
