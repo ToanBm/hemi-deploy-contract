@@ -21,15 +21,16 @@ fi
 
 # Step 3: Install hardhat
 npm init -y
-npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
+npm install --save-dev hardhat
+npm install @openzeppelin/contracts
+npm install --save-dev ethers@^6.1.0
+npm install --save-dev @nomicfoundation/hardhat-toolbox@^5.0.0
 
 # Step 4: Automatically choose "Create an empty hardhat.config.js"
 yes "" | npx hardhat init
 
 echo "Hardhat project initialized with an empty hardhat.config.js."
 
-
-# Step 2: Create the necessary Hardhat files manually instead of using npx hardhat init
 
 # Step 4: Create MyToken.sol contract
 rm  contracts/Lock.sol
