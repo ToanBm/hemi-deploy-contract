@@ -1,21 +1,24 @@
 #!/bin/bash
+# Logo
+echo -e "\033[0;34m"
+echo "Logo is comming soon..."
+echo -e "\e[0m"
 
-# Step 3: Install hardhat
+# Step 1: Install hardhat
+echo "Installing Hardhat..."
 npm init -y
-
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
-
+echo "Installing dotenv..."
 npm install dotenv
 
-# Step 4: Automatically choose "Create an empty hardhat.config.js"
+# Step 2: Automatically choose "Create an empty hardhat.config.js"
+echo "Creating project with an empty hardhat.config.js..."
 yes "3" | npx hardhat init
 
-echo "Hardhat project initialized with an empty hardhat.config.js."
 
-
-# Step 4: Create MyToken.sol contract
+# Step 3: Create MyToken.sol contract
+echo "Creating ERC20 contract..."
 mkdir contracts 
-
 cat <<EOL > contracts/MyToken.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -23,21 +26,23 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract MyToken is ERC20 {
-    constructor(uint256 initialSupply) ERC20("MyToken", "MTK") {
+    constructor(uint256 initialSupply) ERC20("Hemi Token Test", "HEMI") {
         _mint(msg.sender, initialSupply);
     }
 }
 EOL
 
 
-# Step 7: Create .env file for storing private key
-read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
+# Step 4: Create .env file for storing private key
+echo "Creating .env file..."
 
+read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
 cat <<EOF > .env
 PRIVATE_KEY=$PRIVATE_KEY
 EOF
 
-# Step 8: Update hardhat.config.js with the proper configuration
+# Step 5: Update hardhat.config.js with the proper configuration
+echo "Creating new hardhat.config file..."
 rm hardhat.config.js
 
 cat <<EOL > hardhat.config.js
@@ -57,7 +62,8 @@ module.exports = {
 };
 EOL
 
-# Step 9: Create deploy script
+# Step 6: Create deploy script
+echo "Creating deploy script..."
 mkdir scripts
 
 cat <<EOL > scripts/deploy.js
@@ -79,8 +85,13 @@ main().catch((error) => {
 });
 EOL
 
-# Step 5: Compile contracts
+# Step 7: Compile contracts
+echo "Compiling your contracts..."
 npx hardhat compile
 
-# Step 10: Deploy the contract to the Hemi network
+# Step 8: Deploy the contract to the Hemi network
+echo "Deploying your contracts..."
 npx hardhat run scripts/deploy.js --network hemi
+
+echo "Thank you!"
+
