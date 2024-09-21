@@ -10,7 +10,7 @@ else
     echo "Node.js is already installed."
 fi
 
-# Step 2: Install npx if not installed
+# Step 2: Install npx (if not installed)
 if ! command -v npx &> /dev/null
 then
     echo "npx not found. Installing npx..."
@@ -20,10 +20,11 @@ else
 fi
 
 # Step 3: Install hardhat
+npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
 
 # Step 4: Automatically choose "Create an empty hardhat.config.js"
-yes "" | npx hardhat
+yes "" | npx hardhat init
 
 echo "Hardhat project initialized with an empty hardhat.config.js."
 
