@@ -81,6 +81,8 @@ module.exports = {
 EOL
 
 # Step 9: Create deploy script
+mkdir scripts
+
 cat <<EOL > scripts/deploy.js
 const { ethers } = require("hardhat");
 
