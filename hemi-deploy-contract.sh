@@ -23,7 +23,7 @@ fi
 npm init -y
 npm install --save-dev hardhat
 npm install @openzeppelin/contracts
-npm install --save-dev ethers@^6.1.0
+npm install --save-dev ethers@^5.0.0 @nomiclabs/hardhat-ethers
 npm install --save-dev @nomicfoundation/hardhat-toolbox@^5.0.0
 
 # Step 4: Automatically choose "Create an empty hardhat.config.js"
