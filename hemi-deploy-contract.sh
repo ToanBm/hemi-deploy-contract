@@ -89,6 +89,9 @@ EOL
 echo "Compiling your contracts..."
 npx hardhat compile
 
+echo "Waiting before deploying..."
+sleep 10
+
 # Step 8: Deploy the contract to the Hemi network
 echo "Deploying your contracts..."
 npx hardhat run scripts/deploy.js --network hemi
