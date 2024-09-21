@@ -5,19 +5,18 @@ echo "Logo is comming soon..."
 echo -e "\e[0m"
 
 # Step 1: Install hardhat
-echo "Installing Hardhat..."
+echo "Install Hardhat..."
 npm init -y
 npm install --save-dev hardhat @nomiclabs/hardhat-ethers ethers @openzeppelin/contracts
-echo "Installing dotenv..."
+echo "Install dotenv..."
 npm install dotenv
 
 # Step 2: Automatically choose "Create an empty hardhat.config.js"
 echo "Creating project with an empty hardhat.config.js..."
 yes "3" | npx hardhat init
 
-
 # Step 3: Create MyToken.sol contract
-echo "Creating ERC20 contract..."
+echo "Create ERC20 contract..."
 mkdir contracts 
 cat <<EOL > contracts/MyToken.sol
 // SPDX-License-Identifier: MIT
@@ -32,9 +31,8 @@ contract MyToken is ERC20 {
 }
 EOL
 
-
 # Step 4: Create .env file for storing private key
-echo "Creating .env file..."
+echo "Create .env file..."
 
 read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
 cat <<EOF > .env
@@ -86,14 +84,14 @@ main().catch((error) => {
 EOL
 
 # Step 7: Compile contracts
-echo "Compiling your contracts..."
+echo "Compile your contracts..."
 npx hardhat compile
 
-echo "Waiting before deploying..."
+# "Waiting before deploying..."
 sleep 10
 
 # Step 8: Deploy the contract to the Hemi network
-echo "Deploying your contracts..."
+echo "Deploy your contracts..."
 npx hardhat run scripts/deploy.js --network hemi
 
 echo "Thank you!"
