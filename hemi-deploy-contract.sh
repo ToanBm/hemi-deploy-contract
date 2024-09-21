@@ -29,10 +29,6 @@ contract MyToken is ERC20 {
 }
 EOL
 
-# Step 5: Compile contracts
-npx hardhat compile
-
-
 
 # Step 7: Create .env file for storing private key
 read -p "Enter your EVM wallet private key (without 0x): " PRIVATE_KEY
@@ -82,6 +78,9 @@ main().catch((error) => {
     process.exit(1);
 });
 EOL
+
+# Step 5: Compile contracts
+npx hardhat compile
 
 # Step 10: Deploy the contract to the Hemi network
 npx hardhat run scripts/deploy.js --network hemi
